@@ -5,7 +5,7 @@ Tags: woocommerce, products, recently viewed, shortcode
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.3
+Stable tag: 1.0.0
 License: GPL-2.0-or-later
 
 Displays a clean, responsive grid of the products a visitor has recently viewed on a WooCommerce store.
@@ -41,7 +41,7 @@ Yes. You can set the number of products from the plugin settings screen or use t
 Yes. Use show_price="no" in the shortcode.
 
 == Changelog ==
-= 1.3 =
+= 1.0.0 =
 * Added advanced admin settings for title, price display, and number of products.
 * Increased maximum supported display count to 10.
 * Improved mobile responsiveness for two-column layout.
