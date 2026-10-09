@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WebSemicolon Product View History for WooCommerce
  * Description: Displays a clean, responsive grid of the products a visitor has recently viewed on your WooCommerce store.
- * Version: 1.3
+ * Version: 1.0.0
  * Author: Saeed Amini
  * Author URI: https://github.com/saeedamini144
  * Text Domain: websemicolon-product-view-history-for-woocommerce
