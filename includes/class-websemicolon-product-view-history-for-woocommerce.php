@@ -11,11 +11,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 
+	const COOKIE_NAME  = 'product_view_history_for_woocommerce';
+	const MAX_PRODUCTS = 10;
+
 	private static $styles_printed = false;
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_shortcode' ) );
-		add_action( 'template_redirect', array( $this, 'save_viewed_product' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_enqueue_tracking' ) );
+		add_action( 'wp_ajax_product_view_history_track', array( $this, 'ajax_track' ) );
+		add_action( 'wp_ajax_nopriv_product_view_history_track', array( $this, 'ajax_track' ) );
+		add_action( 'wp_ajax_product_view_history_render', array( $this, 'ajax_render' ) );
+		add_action( 'wp_ajax_nopriv_product_view_history_render', array( $this, 'ajax_render' ) );
 		add_action( 'admin_menu', array( $this, 'register_admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 	}
@@ -27,7 +34,7 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 	public function register_admin_menu() {
 		add_menu_page(
 			__( 'Product View History for WooCommerce', 'websemicolon-product-view-history-for-woocommerce' ),
-			__( 'Product View History for WooCommerce', 'websemicolon-product-view-history-for-woocommerce' ),
+			__( 'View History', 'websemicolon-product-view-history-for-woocommerce' ),
 			'manage_options',
 			'websemicolon-product-view-history-for-woocommerce',
 			array( $this, 'render_admin_page' ),
@@ -42,7 +49,7 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 			'product_view_history_for_woocommerce_display_count',
 			array(
 				'type'              => 'integer',
-				'sanitize_callback' => 'absint',
+				'sanitize_callback' => array( $this, 'sanitize_display_count' ),
 			)
 		);
 		register_setting(
@@ -58,11 +65,43 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 			'product_view_history_for_woocommerce_show_price',
 			array(
 				'type'              => 'string',
-				'sanitize_callback' => function( $value ) {
-					return in_array( strtolower( $value ), array( 'yes', 'no' ), true ) ? 'yes' : 'no';
-				},
+				'sanitize_callback' => array( $this, 'sanitize_yes_no' ),
 			)
 		);
+	}
+
+	public function sanitize_display_count( $value ) {
+		return min( self::MAX_PRODUCTS, max( 1, absint( $value ) ) );
+	}
+
+	public function sanitize_yes_no( $value ) {
+		$value = is_string( $value ) ? strtolower( $value ) : '';
+		return 'no' === $value ? 'no' : 'yes';
+	}
+
+	private function get_default_title() {
+		return __( 'Recently Viewed Products', 'websemicolon-product-view-history-for-woocommerce' );
+	}
+
+	/**
+	 * Reads the viewed product IDs (oldest first) from the visitor's cookie.
+	 *
+	 * @return int[]
+	 */
+	private function get_viewed_ids() {
+		if ( ! isset( $_COOKIE[ self::COOKIE_NAME ] ) ) {
+			return array();
+		}
+
+		$cookie_value = sanitize_text_field( wp_unslash( $_COOKIE[ self::COOKIE_NAME ] ) );
+		$decoded      = json_decode( $cookie_value, true );
+		if ( ! is_array( $decoded ) ) {
+			return array();
+		}
+
+		$ids = array_map( 'absint', array_filter( $decoded, 'is_scalar' ) );
+
+		return array_values( array_unique( array_filter( $ids ) ) );
 	}
 
 	public function render_admin_page() {
@@ -70,9 +109,9 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 			return;
 		}
 
-		$display_count = absint( get_option( 'product_view_history_for_woocommerce_display_count', 5 ) );
-		$display_title = sanitize_text_field( get_option( 'product_view_history_for_woocommerce_title', __( 'Product View History for WooCommerce', 'websemicolon-product-view-history-for-woocommerce' ) ) );
-		$show_price = in_array( strtolower( get_option( 'product_view_history_for_woocommerce_show_price', 'yes' ) ), array( 'yes', 'no' ), true ) ? 'yes' : 'no';
+		$display_count = min( self::MAX_PRODUCTS, max( 1, absint( get_option( 'product_view_history_for_woocommerce_display_count', 5 ) ) ) );
+		$display_title = sanitize_text_field( get_option( 'product_view_history_for_woocommerce_title', $this->get_default_title() ) );
+		$show_price    = $this->sanitize_yes_no( get_option( 'product_view_history_for_woocommerce_show_price', 'yes' ) );
 		?>
 		<div class="wrap">
 			<h1><?php echo esc_html__( 'Product View History for WooCommerce', 'websemicolon-product-view-history-for-woocommerce' ); ?></h1>
@@ -106,8 +145,8 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 						</th>
 						<td>
 							<select name="product_view_history_for_woocommerce_show_price" id="product_view_history_for_woocommerce_show_price">
-									<option value="yes" <?php selected( $show_price, 'yes' ); ?>><?php echo esc_html__( 'Yes', 'websemicolon-product-view-history-for-woocommerce' ); ?></option>
-									<option value="no" <?php selected( $show_price, 'no' ); ?>><?php echo esc_html__( 'No', 'websemicolon-product-view-history-for-woocommerce' ); ?></option>
+								<option value="yes" <?php selected( $show_price, 'yes' ); ?>><?php echo esc_html__( 'Yes', 'websemicolon-product-view-history-for-woocommerce' ); ?></option>
+								<option value="no" <?php selected( $show_price, 'no' ); ?>><?php echo esc_html__( 'No', 'websemicolon-product-view-history-for-woocommerce' ); ?></option>
 							</select>
 						</td>
 					</tr>
@@ -118,48 +157,82 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 		<?php
 	}
 
-	public function save_viewed_product() {
-		if ( ! is_singular( 'product' ) || ! class_exists( 'WooCommerce' ) ) {
+	/**
+	 * Loads the tracking script on single product pages.
+	 *
+	 * Tracking runs in the browser (via AJAX) instead of during page generation,
+	 * so it still works when the page itself is served from a page cache.
+	 */
+	public function maybe_enqueue_tracking() {
+		if ( class_exists( 'WooCommerce' ) && is_singular( 'product' ) ) {
+			$this->enqueue_assets();
+		}
+	}
+
+	private function enqueue_assets() {
+		if ( ! self::$styles_printed ) {
+			wp_register_style( 'websemicolon-product-view-history-for-woocommerce', false, array(), WEBSEMICOLON_PVH_VERSION );
+			wp_enqueue_style( 'websemicolon-product-view-history-for-woocommerce' );
+			wp_add_inline_style( 'websemicolon-product-view-history-for-woocommerce', $this->get_inline_styles() );
+
+			wp_enqueue_script(
+				'websemicolon-product-view-history-for-woocommerce',
+				WEBSEMICOLON_PVH_URL . 'assets/js/view-history.js',
+				array(),
+				WEBSEMICOLON_PVH_VERSION,
+				true
+			);
+			wp_localize_script(
+				'websemicolon-product-view-history-for-woocommerce',
+				'pvhData',
+				array(
+					'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
+					'productId' => is_singular( 'product' ) ? absint( get_queried_object_id() ) : 0,
+				)
+			);
+			self::$styles_printed = true;
+		}
+	}
+
+	/**
+	 * Records a product view. Public endpoint without a nonce on purpose: nonces
+	 * baked into cached pages expire, and this only writes the caller's own cookie.
+	 */
+	public function ajax_track() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$product_id = isset( $_POST['product_id'] ) ? absint( wp_unslash( $_POST['product_id'] ) ) : 0;
+		$this->save_viewed_product( $product_id );
+		wp_send_json_success();
+	}
+
+	private function save_viewed_product( $product_id ) {
+		if ( ! class_exists( 'WooCommerce' ) || ! $product_id || 'product' !== get_post_type( $product_id ) || 'publish' !== get_post_status( $product_id ) ) {
 			return;
 		}
 
-		if ( ! isset( $GLOBALS['post'] ) || ! $GLOBALS['post'] instanceof WP_Post ) {
-			return;
-		}
-
-		$product_id = absint( $GLOBALS['post']->ID );
-		if ( ! $product_id ) {
-			return;
-		}
-
-		$cookie_name = 'product_view_history_for_woocommerce';
-		$viewed_products = array();
-
-		if ( isset( $_COOKIE[ $cookie_name ] ) ) {
-			$cookie_value = sanitize_text_field( wp_unslash( $_COOKIE[ $cookie_name ] ) );
-			if ( is_string( $cookie_value ) ) {
-				$decoded = json_decode( $cookie_value, true );
-				if ( is_array( $decoded ) ) {
-					$viewed_products = array_map( 'absint', $decoded );
-				}
-			}
-		}
-
-		$viewed_products = array_values( array_filter( $viewed_products ) );
-		$viewed_products = array_values( array_unique( array_merge( $viewed_products, array( $product_id ) ) ) );
-		$viewed_products = array_slice( $viewed_products, -10 );
+		// Drop any earlier occurrence so the product moves to the "most recent" end of the list.
+		$viewed_products   = array_diff( $this->get_viewed_ids(), array( $product_id ) );
+		$viewed_products[] = $product_id;
+		$viewed_products   = array_slice( array_values( $viewed_products ), -self::MAX_PRODUCTS );
 
 		$cookie_value = wp_json_encode( $viewed_products );
 		if ( ! $cookie_value ) {
 			$cookie_value = '[]';
 		}
 
-		$expiration = time() + ( 30 * DAY_IN_SECONDS );
-		$path       = defined( 'COOKIEPATH' ) ? COOKIEPATH : '/';
-		$domain     = defined( 'COOKIE_DOMAIN' ) ? COOKIE_DOMAIN : '';
-
 		if ( ! headers_sent() ) {
-			setcookie( $cookie_name, $cookie_value, $expiration, $path, $domain, is_ssl(), true );
+			setcookie(
+				self::COOKIE_NAME,
+				$cookie_value,
+				array(
+					'expires'  => time() + ( 30 * DAY_IN_SECONDS ),
+					'path'     => defined( 'COOKIEPATH' ) ? COOKIEPATH : '/',
+					'domain'   => defined( 'COOKIE_DOMAIN' ) ? COOKIE_DOMAIN : '',
+					'secure'   => is_ssl(),
+					'httponly' => true,
+					'samesite' => 'Lax',
+				)
+			);
 		}
 	}
 
@@ -171,78 +244,91 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 		$atts = shortcode_atts(
 			array(
 				'limit'      => get_option( 'product_view_history_for_woocommerce_display_count', 5 ),
-				'title'      => get_option( 'product_view_history_for_woocommerce_title', __( 'Product View History for WooCommerce', 'websemicolon-product-view-history-for-woocommerce' ) ),
+				'title'      => get_option( 'product_view_history_for_woocommerce_title', $this->get_default_title() ),
 				'show_price' => get_option( 'product_view_history_for_woocommerce_show_price', 'yes' ),
 			),
 			$atts,
 			'product_view_history_for_woocommerce'
 		);
 
-		$limit = min( 10, max( 1, absint( $atts['limit'] ) ) );
-		$title = sanitize_text_field( $atts['title'] );
-		$show_price = 'yes' === strtolower( $atts['show_price'] );
+		$this->enqueue_assets();
 
-		$cookie_name = 'product_view_history_for_woocommerce';
-		if ( ! isset( $_COOKIE[ $cookie_name ] ) ) {
+		// The list is per visitor, so it is filled in by the browser (see assets/js/view-history.js).
+		// This keeps the page HTML identical for everyone and therefore safe to cache.
+		return sprintf(
+			'<div class="pvh-async" data-limit="%1$d" data-title="%2$s" data-show-price="%3$s"></div>',
+			min( self::MAX_PRODUCTS, max( 1, absint( $atts['limit'] ) ) ),
+			esc_attr( sanitize_text_field( $atts['title'] ) ),
+			'yes' === strtolower( $atts['show_price'] ) ? 'yes' : 'no'
+		);
+	}
+
+	public function ajax_render() {
+		// phpcs:disable WordPress.Security.NonceVerification.Missing
+		$limit      = isset( $_POST['limit'] ) ? absint( wp_unslash( $_POST['limit'] ) ) : 5;
+		$title      = isset( $_POST['title'] ) ? sanitize_text_field( wp_unslash( $_POST['title'] ) ) : $this->get_default_title();
+		$show_price = isset( $_POST['show_price'] ) && 'yes' === $_POST['show_price'];
+		$current_id = isset( $_POST['product_id'] ) ? absint( wp_unslash( $_POST['product_id'] ) ) : 0;
+		// phpcs:enable WordPress.Security.NonceVerification.Missing
+
+		wp_send_json_success(
+			array(
+				'html' => $this->build_markup( $limit, $title, $show_price, $current_id ),
+			)
+		);
+	}
+
+	private function build_markup( $limit, $title, $show_price, $current_id ) {
+		if ( ! class_exists( 'WooCommerce' ) ) {
 			return '';
 		}
 
-		$cookie_value = sanitize_text_field( wp_unslash( $_COOKIE[ $cookie_name ] ) );
-		if ( ! is_string( $cookie_value ) ) {
-			return '';
+		$limit = min( self::MAX_PRODUCTS, max( 1, $limit ) );
+
+		$viewed_products_ids = array_reverse( $this->get_viewed_ids() );
+
+		// Do not list the product that is currently being viewed.
+		if ( $current_id ) {
+			$viewed_products_ids = array_values( array_diff( $viewed_products_ids, array( $current_id ) ) );
 		}
 
-		$decoded = json_decode( $cookie_value, true );
-		if ( ! is_array( $decoded ) || empty( $decoded ) ) {
-			return '';
-		}
-
-		$viewed_products_ids = array_values( array_unique( array_map( 'absint', $decoded ) ) );
-		$viewed_products_ids = array_reverse( $viewed_products_ids );
 		$viewed_products_ids = array_slice( $viewed_products_ids, 0, $limit );
 
 		if ( empty( $viewed_products_ids ) ) {
 			return '';
 		}
 
-		$args = array(
-			'post_type'           => 'product',
-			'post_status'         => 'publish',
-			'posts_per_page'      => count( $viewed_products_ids ),
-			'post__in'            => $viewed_products_ids,
-			'orderby'             => 'post__in',
-			'ignore_sticky_posts' => true,
+		$products_query = new WP_Query(
+			array(
+				'post_type'           => 'product',
+				'post_status'         => 'publish',
+				'posts_per_page'      => count( $viewed_products_ids ),
+				'post__in'            => $viewed_products_ids,
+				'orderby'             => 'post__in',
+				'ignore_sticky_posts' => true,
+			)
 		);
-
-		$products_query = new WP_Query( $args );
 		if ( ! $products_query->have_posts() ) {
 			wp_reset_postdata();
 			return '';
 		}
 
-		if ( ! self::$styles_printed ) {
-			wp_register_style( 'websemicolon-product-view-history-for-woocommerce', false, array(), '1.3' );
-			wp_enqueue_style( 'websemicolon-product-view-history-for-woocommerce' );
-			wp_add_inline_style( 'websemicolon-product-view-history-for-woocommerce', $this->get_inline_styles() );
-			self::$styles_printed = true;
-		}
-
 		ob_start();
 		?>
 		<div class="product-view-history-for-woocommerce-wrapper">
-			<span class="pvh-section-title"><?php echo esc_html( $title ); ?></span>
+			<h2 class="pvh-section-title"><?php echo esc_html( $title ); ?></h2>
 			<div class="pvh-product-grid">
 				<?php
 				while ( $products_query->have_posts() ) {
 					$products_query->the_post();
 					$product = wc_get_product( get_the_ID() );
-					if ( ! $product ) {
+					if ( ! $product || 'hidden' === $product->get_catalog_visibility() ) {
 						continue;
 					}
 					?>
 					<div class="pvh-product-item">
 						<a class="pvh-product-link" href="<?php echo esc_url( get_permalink() ); ?>">
-							<?php echo get_the_post_thumbnail( get_the_ID(), 'woocommerce_thumbnail' ); ?>
+							<?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail' ) ); ?>
 							<h3 class="pvh-product-title"><?php echo esc_html( get_the_title() ); ?></h3>
 							<?php if ( $show_price && $product->get_price_html() ) : ?>
 								<span class="pvh-product-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
@@ -270,7 +356,9 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 			box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
 		}
 		.pvh-section-title {
+			display: block;
 			margin: 0 0 1rem;
+			padding: 0;
 			font-size: 1.25rem;
 			font-weight: 700;
 			line-height: 1.3;
@@ -325,11 +413,6 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 			}
 		}
 		@media (max-width: 767px) {
-			.pvh-product-grid {
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-			}
-		}
-		@media (max-width: 480px) {
 			.pvh-product-grid {
 				grid-template-columns: repeat(2, minmax(0, 1fr));
 			}

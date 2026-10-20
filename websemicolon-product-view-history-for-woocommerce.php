@@ -16,4 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+define( 'WEBSEMICOLON_PVH_VERSION', '1.0.0' );
+define( 'WEBSEMICOLON_PVH_URL', plugin_dir_url( __FILE__ ) );
+
 require_once plugin_dir_path( __FILE__ ) . 'includes/functions.php';

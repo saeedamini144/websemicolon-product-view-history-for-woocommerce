@@ -40,6 +40,9 @@ Yes. You can set the number of products from the plugin settings screen or use t
 = Can I hide the product price? =
 Yes. Use show_price="no" in the shortcode.
 
+= Does this work with page caching plugins? =
+Yes. Views are recorded and the list is loaded in the browser via AJAX, so cached pages work correctly. Make sure admin-ajax.php is not cached by your caching plugin or CDN.
+
 == Changelog ==
 = 1.0.0 =
 * Added advanced admin settings for title, price display, and number of products.
