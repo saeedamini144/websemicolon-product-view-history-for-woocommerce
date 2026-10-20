@@ -1,0 +1,165 @@
+# Copyright (C) Saeed Amini
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WebSemicolon Product View History for WooCommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/saeedamini144/websemicolon-product-view-history-for-woocommerce/issues\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: websemicolon-product-view-history-for-woocommerce\n"
+
+#: blocks/product-view-history/index.js
+msgid "0 uses the plugin setting."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Automatic placement"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Back in stock"
+msgstr ""
+
+#: blocks/product-view-history/index.js
+msgid "Display settings"
+msgstr ""
+
+#: blocks/product-view-history/index.js
+msgid "Each visitor will see the products they recently viewed here."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Empty cart page"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Highlights what changed since the visitor viewed a product: price dropped, back in stock, low stock or out of stock."
+msgstr ""
+
+#: blocks/product-view-history/index.js
+msgid "Leave empty to use the plugin setting."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Maximum value is 10."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "No"
+msgstr ""
+
+#: blocks/product-view-history/index.js
+msgid "Number of products"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Number of products to display"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Only %d left"
+msgid_plural "Only %d left"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Order received (thank you) page"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Out of stock"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price dropped"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price dropped %d%%"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Product View History for WooCommerce"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+#: blocks/product-view-history/block.json
+msgid "Recently Viewed Products"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Section title"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Shop page when no products are found"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Show change badges"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Show product price"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Show the history without adding a shortcode. These locations use standard WooCommerce template hooks, so block-based cart and checkout pages may not trigger them; use the block there instead."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Show visitors the products they looked at recently. You can use the shortcode, the \"Recently Viewed Products\" block, or the automatic placements below."
+msgstr ""
+
+#: blocks/product-view-history/block.json
+msgid "Shows each visitor the products they recently viewed, with price drop and back in stock badges."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Single product page (below the product details)"
+msgstr ""
+
+#: blocks/product-view-history/index.js
+msgid "Use plugin setting"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "View History"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "WooCommerce is required for this plugin to work."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Yes"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "You can also override the default settings with shortcode attributes:"
+msgstr ""
+
+#: blocks/product-view-history/block.json
+msgid "history"
+msgstr ""
+
+#: blocks/product-view-history/block.json
+msgid "price drop"
+msgstr ""
+
+#: blocks/product-view-history/block.json
+msgid "recently viewed"
+msgstr ""
+
+#: blocks/product-view-history/block.json
+msgid "viewed products"
+msgstr ""
+

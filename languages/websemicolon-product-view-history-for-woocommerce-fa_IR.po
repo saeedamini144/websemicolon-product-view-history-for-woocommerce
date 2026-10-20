@@ -1,0 +1,165 @@
+# Persian translation of WebSemicolon Product View History for WooCommerce.
+msgid ""
+msgstr ""
+"Project-Id-Version: WebSemicolon Product View History for WooCommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/saeedamini144/websemicolon-product-view-history-for-woocommerce/issues\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fa_IR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: websemicolon-product-view-history-for-woocommerce\n"
+
+#: blocks/product-view-history/index.js
+msgid "0 uses the plugin setting."
+msgstr "مقدار ۰ از تنظیم افزونه استفاده می‌کند."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Automatic placement"
+msgstr "جایگاه خودکار"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Back in stock"
+msgstr "دوباره موجود شد"
+
+#: blocks/product-view-history/index.js
+msgid "Display settings"
+msgstr "تنظیمات نمایش"
+
+#: blocks/product-view-history/index.js
+msgid "Each visitor will see the products they recently viewed here."
+msgstr "هر بازدیدکننده محصولاتی را که به‌تازگی دیده است در اینجا می‌بیند."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Empty cart page"
+msgstr "صفحه سبد خرید خالی"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Highlights what changed since the visitor viewed a product: price dropped, back in stock, low stock or out of stock."
+msgstr "تغییرات محصول از زمان بازدید را نشان می‌دهد: کاهش قیمت، موجود شدن مجدد، موجودی کم یا ناموجود شدن."
+
+#: blocks/product-view-history/index.js
+msgid "Leave empty to use the plugin setting."
+msgstr "برای استفاده از تنظیم افزونه خالی بگذارید."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Maximum value is 10."
+msgstr "حداکثر مقدار ۱۰ است."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "No"
+msgstr "خیر"
+
+#: blocks/product-view-history/index.js
+msgid "Number of products"
+msgstr "تعداد محصولات"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Number of products to display"
+msgstr "تعداد محصولات نمایشی"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Only %d left"
+msgid_plural "Only %d left"
+msgstr[0] "فقط %d عدد باقی مانده"
+msgstr[1] "فقط %d عدد باقی مانده"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Order received (thank you) page"
+msgstr "صفحه سفارش دریافت‌شده (تشکر از خرید)"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Out of stock"
+msgstr "ناموجود"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price dropped"
+msgstr "قیمت کاهش یافت"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price dropped %d%%"
+msgstr "قیمت %d%% کاهش یافت"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Product View History for WooCommerce"
+msgstr "تاریخچه بازدید محصولات برای ووکامرس"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+#: blocks/product-view-history/block.json
+msgid "Recently Viewed Products"
+msgstr "محصولات اخیراً بازدیدشده"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Section title"
+msgstr "عنوان بخش"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Shop page when no products are found"
+msgstr "صفحه فروشگاه وقتی محصولی پیدا نشود"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Show change badges"
+msgstr "نمایش نشانگرهای تغییر"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Show product price"
+msgstr "نمایش قیمت محصول"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Show the history without adding a shortcode. These locations use standard WooCommerce template hooks, so block-based cart and checkout pages may not trigger them; use the block there instead."
+msgstr "تاریخچه را بدون افزودن شورت‌کد نمایش دهید. این جایگاه‌ها از هوک‌های استاندارد قالب ووکامرس استفاده می‌کنند، بنابراین صفحات سبد خرید و تسویه‌حساب مبتنی بر بلاک ممکن است آن‌ها را اجرا نکنند؛ در آن صفحات از بلاک استفاده کنید."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Show visitors the products they looked at recently. You can use the shortcode, the \"Recently Viewed Products\" block, or the automatic placements below."
+msgstr "محصولاتی را که بازدیدکنندگان به‌تازگی دیده‌اند به آن‌ها نشان دهید. می‌توانید از شورت‌کد، بلاک «محصولات اخیراً بازدیدشده» یا جایگاه‌های خودکار زیر استفاده کنید."
+
+#: blocks/product-view-history/block.json
+msgid "Shows each visitor the products they recently viewed, with price drop and back in stock badges."
+msgstr "محصولاتی را که هر بازدیدکننده به‌تازگی دیده است، همراه با نشانگر کاهش قیمت و موجود شدن مجدد نشان می‌دهد."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Single product page (below the product details)"
+msgstr "صفحه تکی محصول (زیر جزئیات محصول)"
+
+#: blocks/product-view-history/index.js
+msgid "Use plugin setting"
+msgstr "استفاده از تنظیم افزونه"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "View History"
+msgstr "تاریخچه بازدید"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "WooCommerce is required for this plugin to work."
+msgstr "برای کار کردن این افزونه، ووکامرس لازم است."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Yes"
+msgstr "بله"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "You can also override the default settings with shortcode attributes:"
+msgstr "همچنین می‌توانید تنظیمات پیش‌فرض را با ویژگی‌های شورت‌کد تغییر دهید:"
+
+#: blocks/product-view-history/block.json
+msgid "history"
+msgstr "تاریخچه"
+
+#: blocks/product-view-history/block.json
+msgid "price drop"
+msgstr "کاهش قیمت"
+
+#: blocks/product-view-history/block.json
+msgid "recently viewed"
+msgstr "اخیراً بازدیدشده"
+
+#: blocks/product-view-history/block.json
+msgid "viewed products"
+msgstr "محصولات بازدیدشده"
+

@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "websemicolon/product-view-history",
+	"title": "Recently Viewed Products",
+	"category": "woocommerce",
+	"icon": "visibility",
+	"description": "Shows each visitor the products they recently viewed, with price drop and back in stock badges.",
+	"keywords": [ "recently viewed", "viewed products", "history", "price drop" ],
+	"textdomain": "websemicolon-product-view-history-for-woocommerce",
+	"attributes": {
+		"limit": {
+			"type": "number",
+			"default": 0
+		},
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"showPrice": {
+			"type": "string",
+			"default": "default"
+		},
+		"badges": {
+			"type": "string",
+			"default": "default"
+		}
+	},
+	"supports": {
+		"html": false
+	},
+	"editorScript": "websemicolon-pvh-block-editor"
+}

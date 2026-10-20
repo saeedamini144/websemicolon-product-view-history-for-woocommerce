@@ -1,0 +1,51 @@
+{
+    "translation-revision-date": "2026-10-20 13:06:37+0000",
+    "generator": "manual",
+    "source": "blocks/product-view-history/index.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "fa_IR",
+                "plural-forms": "nplurals=2; plural=(n > 1);"
+            },
+            "0 uses the plugin setting.": [
+                "مقدار ۰ از تنظیم افزونه استفاده می‌کند."
+            ],
+            "Display settings": [
+                "تنظیمات نمایش"
+            ],
+            "Each visitor will see the products they recently viewed here.": [
+                "هر بازدیدکننده محصولاتی را که به‌تازگی دیده است در اینجا می‌بیند."
+            ],
+            "Leave empty to use the plugin setting.": [
+                "برای استفاده از تنظیم افزونه خالی بگذارید."
+            ],
+            "No": [
+                "خیر"
+            ],
+            "Number of products": [
+                "تعداد محصولات"
+            ],
+            "Recently Viewed Products": [
+                "محصولات اخیراً بازدیدشده"
+            ],
+            "Section title": [
+                "عنوان بخش"
+            ],
+            "Show change badges": [
+                "نمایش نشانگرهای تغییر"
+            ],
+            "Show product price": [
+                "نمایش قیمت محصول"
+            ],
+            "Use plugin setting": [
+                "استفاده از تنظیم افزونه"
+            ],
+            "Yes": [
+                "بله"
+            ]
+        }
+    }
+}

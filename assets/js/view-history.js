@@ -29,6 +29,7 @@
 				limit: el.getAttribute( 'data-limit' ),
 				title: el.getAttribute( 'data-title' ),
 				show_price: el.getAttribute( 'data-show-price' ),
+				badges: el.getAttribute( 'data-badges' ),
 				product_id: config.productId || 0
 			} ).then( function ( result ) {
 				if ( result && result.success && result.data && result.data.html ) {
