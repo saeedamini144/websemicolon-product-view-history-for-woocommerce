@@ -1633,10 +1633,20 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 		.pvh-layout-carousel .pvh-product-grid {
 			display: flex;
 			overflow-x: auto;
+			overscroll-behavior-x: contain;
 			padding: 0.25rem 0;
 			scroll-snap-type: x mandatory;
 			scroll-behavior: smooth;
-			scrollbar-width: thin;
+			-ms-overflow-style: none;
+			scrollbar-width: none;
+		}
+		.pvh-layout-carousel .pvh-product-grid::-webkit-scrollbar {
+			display: none;
+		}
+		.pvh-layout-carousel,
+		.pvh-layout-carousel .pvh-viewport {
+			min-width: 0;
+			max-width: 100%;
 		}
 		.pvh-layout-carousel .pvh-product-item {
 			flex: 0 0 calc((100% - (var(--pvh-visible) - 1) * 1rem) / var(--pvh-visible));
