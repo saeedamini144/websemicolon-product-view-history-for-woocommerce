@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-10-20 13:06:37+0000",
+    "translation-revision-date": "2026-10-21 10:23:46+0000",
     "generator": "manual",
     "source": "blocks/product-view-history/index.js",
     "domain": "messages",
@@ -13,14 +13,26 @@
             "0 uses the plugin setting.": [
                 "مقدار ۰ از تنظیم افزونه استفاده می‌کند."
             ],
+            "Carousel (slider)": [
+                "اسلایدر"
+            ],
             "Display settings": [
                 "تنظیمات نمایش"
             ],
             "Each visitor will see the products they recently viewed here.": [
                 "هر بازدیدکننده محصولاتی را که به‌تازگی دیده است در اینجا می‌بیند."
             ],
+            "Grid": [
+                "شبکه‌ای"
+            ],
+            "Layout": [
+                "چیدمان"
+            ],
             "Leave empty to use the plugin setting.": [
                 "برای استفاده از تنظیم افزونه خالی بگذارید."
+            ],
+            "List": [
+                "لیستی"
             ],
             "No": [
                 "خیر"
@@ -33,6 +45,9 @@
             ],
             "Section title": [
                 "عنوان بخش"
+            ],
+            "Show \"Add to cart\" button": [
+                "نمایش دکمه «افزودن به سبد خرید»"
             ],
             "Show change badges": [
                 "نمایش نشانگرهای تغییر"

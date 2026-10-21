@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WebSemicolon Product View History for WooCommerce 1.0.0\n"
+"Project-Id-Version: WebSemicolon Recently Viewed Products for WooCommerce 1.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/saeedamini144/websemicolon-product-view-history-for-woocommerce/issues\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,11 +15,52 @@ msgid "0 uses the plugin setting."
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Add to cart"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "All viewed products"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Appearance"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Automatic placement"
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Back in stock"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Back in stock badge color"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Badge text size (px)"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Border color"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Carousel (slider)"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Columns on desktop"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Corner radius (px)"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Customize the fonts, sizes and colors. Use the \"Default\" button of a color to go back to the built-in color."
 msgstr ""
 
 #: blocks/product-view-history/index.js
@@ -35,7 +76,25 @@ msgid "Empty cart page"
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Font"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Grid"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Highlights what changed since the visitor viewed a product: price dropped, back in stock, low stock or out of stock."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "In stock"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Layout"
 msgstr ""
 
 #: blocks/product-view-history/index.js
@@ -43,12 +102,41 @@ msgid "Leave empty to use the plugin setting."
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "List"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Live preview"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Low stock badge color"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Maximum value is 10."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Monospace"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Next products"
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
 #: blocks/product-view-history/index.js
 msgid "No"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "No data yet. Views are counted as visitors open product pages."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Not purchased yet"
 msgstr ""
 
 #: blocks/product-view-history/index.js
@@ -66,11 +154,35 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Only system fonts are offered, so nothing is downloaded from external servers."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Order received (thank you) page"
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Out of stock"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Out of stock badge color"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Previous products"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price color"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price drop badge color"
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
@@ -82,7 +194,35 @@ msgid "Price dropped %d%%"
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price dropped 20%"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price size (px)"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Product"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Product View History for WooCommerce"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Product card background"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Product title color"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Product title size (px)"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Purchases per 100 views"
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
@@ -92,12 +232,65 @@ msgid "Recently Viewed Products"
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Recently Viewed Products for WooCommerce"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Recently viewed products"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Report"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Reset all view statistics? This cannot be undone."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Reset statistics"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Sample product %d"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Saves the history in the customer account so it follows them across devices. Guests only use a cookie in their own browser."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Section background"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 #: blocks/product-view-history/index.js
 msgid "Section title"
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Section title color"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Section title size (px)"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Serif"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Settings"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Shop page when no products are found"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Show \"Add to cart\" button"
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
@@ -126,12 +319,64 @@ msgstr ""
 msgid "Single product page (below the product details)"
 msgstr ""
 
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Stock"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Sync for logged-in customers"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "System sans-serif"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Tablets show up to 3 columns and phones show 2. In the carousel this is the number of visible products."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Tahoma (good for Persian and Arabic)"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Theme font (default)"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "This site remembers the products a visitor viewed in a cookie named product_view_history_for_woocommerce. It holds product IDs, the price and stock status the product had at that moment, and the time of the view, and it lasts 30 days. For logged-in customers the same list is also saved in their account so it can follow them across devices; it is included in personal data exports and removed by erasure requests. The site also keeps an anonymous view counter per product, which is not linked to any visitor."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Units sold"
+msgstr ""
+
 #: blocks/product-view-history/index.js
 msgid "Use plugin setting"
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Uses the standard WooCommerce button, including AJAX add to cart when it is enabled in WooCommerce. Variable products show \"Select options\"."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "View History"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "View statistics were reset."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Viewed but not purchased"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Viewed on"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Views"
 msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
@@ -145,6 +390,14 @@ msgstr ""
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "You can also override the default settings with shortcode attributes:"
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "You do not have permission to do this."
+msgstr ""
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Your most viewed products and how many units were sold while views were being counted. Products with many views and no sales may need a better price, photos or description. Each visit counts once per 30 minutes per visitor, and shop managers are not counted."
 msgstr ""
 
 #: blocks/product-view-history/block.json

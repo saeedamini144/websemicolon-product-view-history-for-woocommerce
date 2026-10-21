@@ -1,7 +1,7 @@
 # Persian translation of WebSemicolon Product View History for WooCommerce.
 msgid ""
 msgstr ""
-"Project-Id-Version: WebSemicolon Product View History for WooCommerce 1.0.0\n"
+"Project-Id-Version: WebSemicolon Recently Viewed Products for WooCommerce 1.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/saeedamini144/websemicolon-product-view-history-for-woocommerce/issues\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,12 +15,53 @@ msgid "0 uses the plugin setting."
 msgstr "مقدار ۰ از تنظیم افزونه استفاده می‌کند."
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Add to cart"
+msgstr "افزودن به سبد خرید"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "All viewed products"
+msgstr "همه محصولات بازدیدشده"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Appearance"
+msgstr "ظاهر"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Automatic placement"
 msgstr "جایگاه خودکار"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Back in stock"
 msgstr "دوباره موجود شد"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Back in stock badge color"
+msgstr "رنگ نشانگر موجود شدن مجدد"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Badge text size (px)"
+msgstr "اندازه متن نشانگر (پیکسل)"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Border color"
+msgstr "رنگ حاشیه"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Carousel (slider)"
+msgstr "اسلایدر"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Columns on desktop"
+msgstr "تعداد ستون در دسکتاپ"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Corner radius (px)"
+msgstr "گردی گوشه‌ها (پیکسل)"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Customize the fonts, sizes and colors. Use the \"Default\" button of a color to go back to the built-in color."
+msgstr "فونت، اندازه‌ها و رنگ‌ها را سفارشی کنید. برای بازگشت به رنگ پیش‌فرض از دکمه «پیش‌فرض» کنار هر رنگ استفاده کنید."
 
 #: blocks/product-view-history/index.js
 msgid "Display settings"
@@ -35,21 +76,68 @@ msgid "Empty cart page"
 msgstr "صفحه سبد خرید خالی"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Font"
+msgstr "فونت"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Grid"
+msgstr "شبکه‌ای"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Highlights what changed since the visitor viewed a product: price dropped, back in stock, low stock or out of stock."
 msgstr "تغییرات محصول از زمان بازدید را نشان می‌دهد: کاهش قیمت، موجود شدن مجدد، موجودی کم یا ناموجود شدن."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "In stock"
+msgstr "موجود"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Layout"
+msgstr "چیدمان"
 
 #: blocks/product-view-history/index.js
 msgid "Leave empty to use the plugin setting."
 msgstr "برای استفاده از تنظیم افزونه خالی بگذارید."
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "List"
+msgstr "لیستی"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Live preview"
+msgstr "پیش‌نمایش زنده"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Low stock badge color"
+msgstr "رنگ نشانگر موجودی کم"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Maximum value is 10."
 msgstr "حداکثر مقدار ۱۰ است."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Monospace"
+msgstr "تک‌فاصله"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Next products"
+msgstr "محصولات بعدی"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
 #: blocks/product-view-history/index.js
 msgid "No"
 msgstr "خیر"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "No data yet. Views are counted as visitors open product pages."
+msgstr "هنوز داده‌ای وجود ندارد. بازدیدها هنگام باز شدن صفحه محصول شمرده می‌شوند."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Not purchased yet"
+msgstr "هنوز خریده نشده"
 
 #: blocks/product-view-history/index.js
 msgid "Number of products"
@@ -66,12 +154,36 @@ msgstr[0] "فقط %d عدد باقی مانده"
 msgstr[1] "فقط %d عدد باقی مانده"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Only system fonts are offered, so nothing is downloaded from external servers."
+msgstr "فقط فونت‌های سیستم ارائه می‌شود، بنابراین چیزی از سرورهای بیرونی دانلود نمی‌شود."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Order received (thank you) page"
 msgstr "صفحه سفارش دریافت‌شده (تشکر از خرید)"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Out of stock"
 msgstr "ناموجود"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Out of stock badge color"
+msgstr "رنگ نشانگر ناموجود"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Previous products"
+msgstr "محصولات قبلی"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price"
+msgstr "قیمت"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price color"
+msgstr "رنگ قیمت"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price drop badge color"
+msgstr "رنگ نشانگر کاهش قیمت"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Price dropped"
@@ -82,8 +194,36 @@ msgid "Price dropped %d%%"
 msgstr "قیمت %d%% کاهش یافت"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price dropped 20%"
+msgstr "قیمت ۲۰٪ کاهش یافت"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Price size (px)"
+msgstr "اندازه قیمت (پیکسل)"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Product"
+msgstr "محصول"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Product View History for WooCommerce"
 msgstr "تاریخچه بازدید محصولات برای ووکامرس"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Product card background"
+msgstr "پس‌زمینه کارت محصول"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Product title color"
+msgstr "رنگ عنوان محصول"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Product title size (px)"
+msgstr "اندازه عنوان محصول (پیکسل)"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Purchases per 100 views"
+msgstr "خرید به ازای ۱۰۰ بازدید"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
 #: blocks/product-view-history/index.js
@@ -92,13 +232,66 @@ msgid "Recently Viewed Products"
 msgstr "محصولات اخیراً بازدیدشده"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Recently Viewed Products for WooCommerce"
+msgstr "محصولات اخیراً بازدیدشده برای ووکامرس"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Recently viewed products"
+msgstr "محصولات اخیراً بازدیدشده"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Report"
+msgstr "گزارش"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Reset all view statistics? This cannot be undone."
+msgstr "همه آمار بازدید بازنشانی شود؟ این کار قابل بازگشت نیست."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Reset statistics"
+msgstr "بازنشانی آمار"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Sample product %d"
+msgstr "محصول نمونه %d"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Saves the history in the customer account so it follows them across devices. Guests only use a cookie in their own browser."
+msgstr "تاریخچه را در حساب مشتری ذخیره می‌کند تا بین دستگاه‌ها همراهش باشد. مهمان‌ها فقط از یک کوکی در مرورگر خودشان استفاده می‌کنند."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Section background"
+msgstr "پس‌زمینه بخش"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 #: blocks/product-view-history/index.js
 msgid "Section title"
 msgstr "عنوان بخش"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Section title color"
+msgstr "رنگ عنوان بخش"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Section title size (px)"
+msgstr "اندازه عنوان بخش (پیکسل)"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Serif"
+msgstr "سریف"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Settings"
+msgstr "تنظیمات"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "Shop page when no products are found"
 msgstr "صفحه فروشگاه وقتی محصولی پیدا نشود"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+#: blocks/product-view-history/index.js
+msgid "Show \"Add to cart\" button"
+msgstr "نمایش دکمه «افزودن به سبد خرید»"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
 #: blocks/product-view-history/index.js
@@ -126,13 +319,65 @@ msgstr "محصولاتی را که هر بازدیدکننده به‌تازگی
 msgid "Single product page (below the product details)"
 msgstr "صفحه تکی محصول (زیر جزئیات محصول)"
 
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Stock"
+msgstr "موجودی"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Sync for logged-in customers"
+msgstr "همگام‌سازی برای مشتریان واردشده"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "System sans-serif"
+msgstr "فونت بدون‌سریف سیستم"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Tablets show up to 3 columns and phones show 2. In the carousel this is the number of visible products."
+msgstr "در تبلت حداکثر ۳ ستون و در موبایل ۲ ستون نمایش داده می‌شود. در اسلایدر، این عدد تعداد محصولات قابل‌مشاهده است."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Tahoma (good for Persian and Arabic)"
+msgstr "تاهوما (مناسب فارسی و عربی)"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Theme font (default)"
+msgstr "فونت قالب (پیش‌فرض)"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "This site remembers the products a visitor viewed in a cookie named product_view_history_for_woocommerce. It holds product IDs, the price and stock status the product had at that moment, and the time of the view, and it lasts 30 days. For logged-in customers the same list is also saved in their account so it can follow them across devices; it is included in personal data exports and removed by erasure requests. The site also keeps an anonymous view counter per product, which is not linked to any visitor."
+msgstr "این سایت محصولاتی را که بازدیدکننده دیده است در کوکی‌ای به نام product_view_history_for_woocommerce به خاطر می‌سپارد. این کوکی شناسه محصولات، قیمت و وضعیت موجودی محصول در لحظه بازدید و زمان بازدید را نگه می‌دارد و ۳۰ روز اعتبار دارد. برای مشتریان واردشده، همین فهرست در حساب کاربری آن‌ها هم ذخیره می‌شود تا بین دستگاه‌ها همراهشان باشد؛ این فهرست در خروجی گرفتن از داده‌های شخصی گنجانده می‌شود و با درخواست پاک‌سازی حذف می‌شود. سایت همچنین برای هر محصول یک شمارنده ناشناس بازدید نگه می‌دارد که به هیچ بازدیدکننده‌ای وصل نیست."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Units sold"
+msgstr "تعداد فروش"
+
 #: blocks/product-view-history/index.js
 msgid "Use plugin setting"
 msgstr "استفاده از تنظیم افزونه"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Uses the standard WooCommerce button, including AJAX add to cart when it is enabled in WooCommerce. Variable products show \"Select options\"."
+msgstr "از دکمه استاندارد ووکامرس استفاده می‌کند، از جمله افزودن آژاکسی به سبد خرید در صورت فعال بودن در ووکامرس. محصولات متغیر «انتخاب گزینه‌ها» را نشان می‌دهند."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "View History"
 msgstr "تاریخچه بازدید"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "View statistics were reset."
+msgstr "آمار بازدید بازنشانی شد."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Viewed but not purchased"
+msgstr "دیده‌شده ولی خریده‌نشده"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Viewed on"
+msgstr "زمان بازدید"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Views"
+msgstr "بازدید"
 
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "WooCommerce is required for this plugin to work."
@@ -146,6 +391,14 @@ msgstr "بله"
 #: includes/class-websemicolon-product-view-history-for-woocommerce.php
 msgid "You can also override the default settings with shortcode attributes:"
 msgstr "همچنین می‌توانید تنظیمات پیش‌فرض را با ویژگی‌های شورت‌کد تغییر دهید:"
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "You do not have permission to do this."
+msgstr "شما اجازه انجام این کار را ندارید."
+
+#: includes/class-websemicolon-product-view-history-for-woocommerce.php
+msgid "Your most viewed products and how many units were sold while views were being counted. Products with many views and no sales may need a better price, photos or description. Each visit counts once per 30 minutes per visitor, and shop managers are not counted."
+msgstr "پربازدیدترین محصولات شما و تعداد فروش آن‌ها در مدتی که بازدیدها شمرده می‌شد. محصولاتی که بازدید زیاد ولی فروش ندارند ممکن است به قیمت، تصویر یا توضیحات بهتری نیاز داشته باشند. هر بازدیدکننده در هر ۳۰ دقیقه یک بار شمرده می‌شود و مدیران فروشگاه شمرده نمی‌شوند."
 
 #: blocks/product-view-history/block.json
 msgid "history"

@@ -16,6 +16,13 @@
 		{ label: __( 'No', 'websemicolon-product-view-history-for-woocommerce' ), value: 'no' }
 	];
 
+	var layoutChoices = [
+		{ label: __( 'Use plugin setting', 'websemicolon-product-view-history-for-woocommerce' ), value: 'default' },
+		{ label: __( 'Grid', 'websemicolon-product-view-history-for-woocommerce' ), value: 'grid' },
+		{ label: __( 'Carousel (slider)', 'websemicolon-product-view-history-for-woocommerce' ), value: 'carousel' },
+		{ label: __( 'List', 'websemicolon-product-view-history-for-woocommerce' ), value: 'list' }
+	];
+
 	wp.blocks.registerBlockType( 'websemicolon/product-view-history', {
 		edit: function ( props ) {
 			var attributes = props.attributes;
@@ -62,6 +69,22 @@
 							value: attributes.title,
 							onChange: function ( value ) {
 								setAttributes( { title: value } );
+							}
+						} ),
+						el( SelectControl, {
+							label: __( 'Layout', 'websemicolon-product-view-history-for-woocommerce' ),
+							value: attributes.layout,
+							options: layoutChoices,
+							onChange: function ( value ) {
+								setAttributes( { layout: value } );
+							}
+						} ),
+						el( SelectControl, {
+							label: __( 'Show "Add to cart" button', 'websemicolon-product-view-history-for-woocommerce' ),
+							value: attributes.addToCart,
+							options: choices,
+							onChange: function ( value ) {
+								setAttributes( { addToCart: value } );
 							}
 						} ),
 						el( SelectControl, {

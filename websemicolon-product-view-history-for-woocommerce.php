@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WebSemicolon Recently Viewed Products for WooCommerce – Price Drop & Back in Stock Badges
  * Description: Show recently viewed products to WooCommerce shoppers, with price drop and back in stock badges. Cache compatible. Block, shortcode, RTL.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Saeed Amini
  * Author URI: https://github.com/saeedamini144
  * Text Domain: websemicolon-product-view-history-for-woocommerce
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WEBSEMICOLON_PVH_VERSION', '1.0.0' );
+define( 'WEBSEMICOLON_PVH_VERSION', '1.0.1' );
 define( 'WEBSEMICOLON_PVH_FILE', __FILE__ );
 define( 'WEBSEMICOLON_PVH_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WEBSEMICOLON_PVH_URL', plugin_dir_url( __FILE__ ) );

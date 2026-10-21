@@ -17,11 +17,19 @@
 			"type": "string",
 			"default": ""
 		},
+		"layout": {
+			"type": "string",
+			"default": "default"
+		},
 		"showPrice": {
 			"type": "string",
 			"default": "default"
 		},
 		"badges": {
+			"type": "string",
+			"default": "default"
+		},
+		"addToCart": {
 			"type": "string",
 			"default": "default"
 		}
