@@ -6,7 +6,7 @@ Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -150,11 +150,21 @@ The cookie is used only to show the visitor their own recently viewed products. 
 Other data the plugin stores:
 
 * **Logged-in customers (optional):** the same short list is saved in the customer's user meta (`product_view_history_for_woocommerce_items`) so it follows them across devices. It is included in the WordPress personal data export, removed by the personal data erase tool, and removed when the plugin is deleted. It can be turned off in the settings.
-* **Product view counters:** each product has an anonymous view count (`_pvh_views`) used by the report. It is not linked to any visitor.
+* **Product view counters:** each product has an anonymous view count (`_websemicolon_pvh_views`) used by the report. It is not linked to any visitor. To stop the same visitor being counted repeatedly, a salted hash of the visitor's IP address and the product ID is kept for 30 minutes and then discarded; the IP address itself is never stored.
+* **Logging out:** when account sync is on, the cookie is removed at logout so the history is not left behind on a shared computer.
 
 The plugin adds suggested text for your privacy policy under **Settings > Privacy**.
 
 == Changelog ==
+
+= 1.0.2 =
+* Fix: product titles in the cards are now a `span` instead of a heading, so theme heading styles no longer override the plugin's size, color and font settings.
+* Fix: the "Theme font" option now reliably uses the font of your theme.
+* Fix: no empty box is shown when every viewed product is hidden from the catalog.
+* Improved: view statistics are harder to inflate. Repeated requests from the same visitor for the same product are counted once per 30 minutes on the server.
+* Improved: when account sync is on, the history cookie is removed at logout so it is not left behind on a shared computer.
+* Changed: the view counter meta keys were renamed to `_websemicolon_pvh_views` and `_websemicolon_pvh_sales_base`. Existing statistics are moved automatically.
+* Changed: the settings page title now matches the plugin name.
 
 = 1.0.1 =
 * New: change badges on viewed products: price dropped, back in stock, low stock and out of stock.
@@ -181,6 +191,9 @@ The plugin adds suggested text for your privacy policy under **Settings > Privac
 * Improved mobile responsiveness for two-column layout.
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+Fixes product title styling and the theme font option, and makes the view statistics more reliable. Existing statistics are kept.
 
 = 1.0.1 =
 Adds price drop and back in stock badges, carousel and list layouts, an "Add to cart" button, cross-device history for logged-in customers, a "viewed but not purchased" report, page cache support, a block, automatic placements and appearance settings with a live preview. Fixes the "Show product price" setting not saving.

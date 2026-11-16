@@ -21,5 +21,8 @@ delete_option( 'product_view_history_for_woocommerce_sync_users' );
 
 // Customer histories and the anonymous per-product view counters.
 delete_metadata( 'user', 0, 'product_view_history_for_woocommerce_items', '', true );
+delete_post_meta_by_key( '_websemicolon_pvh_views' );
+delete_post_meta_by_key( '_websemicolon_pvh_sales_base' );
 delete_post_meta_by_key( '_pvh_views' );
 delete_post_meta_by_key( '_pvh_sales_base' );
+delete_option( 'product_view_history_for_woocommerce_db_version' );

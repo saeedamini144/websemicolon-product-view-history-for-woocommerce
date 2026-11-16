@@ -15,8 +15,9 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 	const MAX_PRODUCTS       = 10;
 	const MENU_SLUG          = 'websemicolon-product-view-history-for-woocommerce';
 	const USER_META_KEY      = 'product_view_history_for_woocommerce_items';
-	const META_VIEWS         = '_pvh_views';
-	const META_SALES_BASE    = '_pvh_sales_base';
+	const META_VIEWS         = '_websemicolon_pvh_views';
+	const META_SALES_BASE    = '_websemicolon_pvh_sales_base';
+	const DB_VERSION_OPTION  = 'product_view_history_for_woocommerce_db_version';
 	const VIEW_DEDUP_SECONDS = 1800;
 	const LAYOUTS            = array( 'grid', 'carousel', 'list' );
 
@@ -101,6 +102,8 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 		add_action( 'wp_ajax_nopriv_product_view_history_render', array( $this, 'ajax_render' ) );
 		add_action( 'admin_menu', array( $this, 'register_admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
+		add_action( 'admin_init', array( $this, 'maybe_migrate_meta_keys' ) );
+		add_action( 'wp_logout', array( $this, 'clear_cookie_on_logout' ) );
 		add_action( 'admin_init', array( $this, 'add_privacy_policy_content' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		add_action( 'admin_post_product_view_history_reset_stats', array( $this, 'handle_reset_stats' ) );
@@ -147,7 +150,7 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 
 	public function register_admin_menu() {
 		$this->admin_hook = add_menu_page(
-			__( 'Product View History for WooCommerce', 'websemicolon-product-view-history-for-woocommerce' ),
+			__( 'Recently Viewed Products for WooCommerce', 'websemicolon-product-view-history-for-woocommerce' ),
 			__( 'View History', 'websemicolon-product-view-history-for-woocommerce' ),
 			'manage_options',
 			self::MENU_SLUG,
@@ -159,7 +162,7 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 		// The first submenu entry replaces the duplicated top-level label.
 		add_submenu_page(
 			self::MENU_SLUG,
-			__( 'Product View History for WooCommerce', 'websemicolon-product-view-history-for-woocommerce' ),
+			__( 'Recently Viewed Products for WooCommerce', 'websemicolon-product-view-history-for-woocommerce' ),
 			__( 'Settings', 'websemicolon-product-view-history-for-woocommerce' ),
 			'manage_options',
 			self::MENU_SLUG,
@@ -638,7 +641,7 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 		$sync               = $this->sanitize_yes_no( get_option( 'product_view_history_for_woocommerce_sync_users', 'yes' ) );
 		?>
 		<div class="wrap">
-			<h1><?php echo esc_html__( 'Product View History for WooCommerce', 'websemicolon-product-view-history-for-woocommerce' ); ?></h1>
+			<h1><?php echo esc_html__( 'Recently Viewed Products for WooCommerce', 'websemicolon-product-view-history-for-woocommerce' ); ?></h1>
 			<p><?php echo esc_html__( 'Show visitors the products they looked at recently. You can use the shortcode, the "Recently Viewed Products" block, or the automatic placements below.', 'websemicolon-product-view-history-for-woocommerce' ); ?></p>
 			<p><code>[product_view_history_for_woocommerce]</code></p>
 			<p><?php echo esc_html__( 'You can also override the default settings with shortcode attributes:', 'websemicolon-product-view-history-for-woocommerce' ); ?></p>
@@ -851,7 +854,7 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 		.pvh-preview-wrap .pvh-product-title { display: block; }
 		.pvh-preview-wrap .pvh-product-actions .button { display: block; text-align: center; }
 		.pvh-preview-wrap .pvh-layout-list .pvh-product-grid { max-height: 45vh; overflow-y: auto; }
-		.pvh-hide-price .pvh-product-price,
+		.product-view-history-for-woocommerce-wrapper.pvh-hide-price .pvh-product-price,
 		.pvh-hide-badges .pvh-badge,
 		.pvh-hide-cart .pvh-product-actions { display: none; }
 		';
@@ -985,6 +988,18 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 		}
 
 		$product_id = $product->get_id();
+
+		// The cookie-based check is controlled by the visitor, so repeated requests are also
+		// limited on the server. Only a salted hash of the address is kept, for 30 minutes.
+		$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+		if ( '' !== $ip ) {
+			$key = 'websemicolon_pvh_' . md5( wp_salt() . '|' . $ip . '|' . $product_id );
+			if ( get_transient( $key ) ) {
+				return;
+			}
+			set_transient( $key, 1, self::VIEW_DEDUP_SECONDS );
+		}
+
 		$views      = (int) get_post_meta( $product_id, self::META_VIEWS, true );
 
 		// Remember the sales total when tracking starts, so the report compares views and sales over the same period.
@@ -993,6 +1008,51 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 		}
 
 		update_post_meta( $product_id, self::META_VIEWS, $views + 1 );
+	}
+
+	/**
+	 * Moves the view counters saved under the old, shorter meta keys to the current ones. Runs once.
+	 */
+	public function maybe_migrate_meta_keys() {
+		if ( '2' === get_option( self::DB_VERSION_OPTION ) ) {
+			return;
+		}
+
+		global $wpdb;
+		$keys = array(
+			'_pvh_views'      => self::META_VIEWS,
+			'_pvh_sales_base' => self::META_SALES_BASE,
+		);
+		foreach ( $keys as $old => $new ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->update( $wpdb->postmeta, array( 'meta_key' => $new ), array( 'meta_key' => $old ) ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+		}
+		wp_cache_flush();
+
+		update_option( self::DB_VERSION_OPTION, '2', false );
+	}
+
+	/**
+	 * With account sync on, the cookie holds the customer's account history. Remove it at logout
+	 * so the next person using the same browser does not see it.
+	 */
+	public function clear_cookie_on_logout() {
+		if ( ! $this->is_sync_enabled() || headers_sent() ) {
+			return;
+		}
+
+		setcookie(
+			self::COOKIE_NAME,
+			'',
+			array(
+				'expires'  => time() - DAY_IN_SECONDS,
+				'path'     => defined( 'COOKIEPATH' ) ? COOKIEPATH : '/',
+				'domain'   => defined( 'COOKIE_DOMAIN' ) ? COOKIE_DOMAIN : '',
+				'secure'   => is_ssl(),
+				'httponly' => true,
+				'samesite' => 'Lax',
+			)
+		);
 	}
 
 	/**
@@ -1198,6 +1258,48 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 		}
 
 		ob_start();
+		while ( $products_query->have_posts() ) {
+			$products_query->the_post();
+			$product = wc_get_product( get_the_ID() );
+			if ( ! $product || 'hidden' === $product->get_catalog_visibility() ) {
+				continue;
+			}
+			$badge = $show_badges ? $this->get_badge( $product, $items[ get_the_ID() ] ) : null;
+			?>
+			<div class="pvh-product-item">
+				<?php if ( $badge ) : ?>
+					<span class="pvh-badge pvh-badge--<?php echo esc_attr( $badge[0] ); ?>"><?php echo esc_html( $badge[1] ); ?></span>
+				<?php endif; ?>
+				<a class="pvh-product-link" href="<?php echo esc_url( get_permalink() ); ?>">
+					<?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail' ) ); ?>
+					<span class="pvh-product-info">
+						<span class="pvh-product-title"><?php echo esc_html( get_the_title() ); ?></span>
+						<?php if ( $show_price && $product->get_price_html() ) : ?>
+							<span class="pvh-product-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
+						<?php endif; ?>
+					</span>
+				</a>
+				<?php if ( $add_to_cart ) : ?>
+					<div class="pvh-product-actions">
+						<?php
+						$GLOBALS['product'] = $product;
+						// Output is escaped by WooCommerce's own template.
+						woocommerce_template_loop_add_to_cart();
+						?>
+					</div>
+				<?php endif; ?>
+			</div>
+			<?php
+		}
+		wp_reset_postdata();
+		$cards = ob_get_clean();
+
+		// Every viewed product may turn out to be hidden; show nothing rather than an empty box.
+		if ( '' === trim( $cards ) ) {
+			return '';
+		}
+
+		ob_start();
 		?>
 		<div class="product-view-history-for-woocommerce-wrapper pvh-layout-<?php echo esc_attr( $layout ); ?>">
 			<h2 class="pvh-section-title"><?php echo esc_html( $title ); ?></h2>
@@ -1207,40 +1309,9 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 				<?php endif; ?>
 				<div class="pvh-product-grid">
 					<?php
-					while ( $products_query->have_posts() ) {
-						$products_query->the_post();
-						$product = wc_get_product( get_the_ID() );
-						if ( ! $product || 'hidden' === $product->get_catalog_visibility() ) {
-							continue;
-						}
-						$badge = $show_badges ? $this->get_badge( $product, $items[ get_the_ID() ] ) : null;
-						?>
-						<div class="pvh-product-item">
-							<?php if ( $badge ) : ?>
-								<span class="pvh-badge pvh-badge--<?php echo esc_attr( $badge[0] ); ?>"><?php echo esc_html( $badge[1] ); ?></span>
-							<?php endif; ?>
-							<a class="pvh-product-link" href="<?php echo esc_url( get_permalink() ); ?>">
-								<?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail' ) ); ?>
-								<div class="pvh-product-info">
-									<h3 class="pvh-product-title"><?php echo esc_html( get_the_title() ); ?></h3>
-									<?php if ( $show_price && $product->get_price_html() ) : ?>
-										<span class="pvh-product-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
-									<?php endif; ?>
-								</div>
-							</a>
-							<?php if ( $add_to_cart ) : ?>
-								<div class="pvh-product-actions">
-									<?php
-									$GLOBALS['product'] = $product;
-									// Output is escaped by WooCommerce's own template.
-									woocommerce_template_loop_add_to_cart();
-									?>
-								</div>
-							<?php endif; ?>
-						</div>
-						<?php
-					}
-					wp_reset_postdata();
+					// Built above from escaped values.
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo $cards;
 					?>
 				</div>
 				<?php if ( 'carousel' === $layout ) : ?>
@@ -1472,6 +1543,10 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 
 		$declarations = '';
 		foreach ( $variables as $name => $value ) {
+			// "inherit" is not a usable custom property value; leaving the variable out makes the theme font apply.
+			if ( 'font' === $name && 'inherit' === $value ) {
+				continue;
+			}
 			$declarations .= '--pvh-' . $name . ':' . $value . ';';
 		}
 
@@ -1486,10 +1561,10 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 			border: 1px solid var(--pvh-border);
 			border-radius: calc(var(--pvh-radius) + 2px);
 			box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
-			font-family: var(--pvh-font);
+			font-family: var(--pvh-font, inherit);
 			text-align: start;
 		}
-		.pvh-section-title {
+		.product-view-history-for-woocommerce-wrapper .pvh-section-title {
 			display: block;
 			margin: 0 0 1rem;
 			padding: 0;
@@ -1521,11 +1596,15 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 			transform: translateY(-2px);
 			box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
 		}
-		.pvh-product-link {
+		.product-view-history-for-woocommerce-wrapper .pvh-product-link {
 			display: block;
 			flex: 1 1 auto;
 			color: inherit;
+			font-family: inherit;
 			text-decoration: none;
+		}
+		.pvh-product-info {
+			display: block;
 		}
 		.pvh-product-link img {
 			width: 100%;
@@ -1536,15 +1615,17 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 			margin-bottom: 0.75rem;
 			display: block;
 		}
-		.pvh-product-title {
+		.product-view-history-for-woocommerce-wrapper .pvh-product-title {
+			display: block;
 			margin: 0 0 0.4rem;
+			padding: 0;
 			font-family: inherit;
 			font-size: var(--pvh-item-title-size);
 			font-weight: 600;
 			line-height: 1.4;
 			color: var(--pvh-item-title-color);
 		}
-		.pvh-product-price {
+		.product-view-history-for-woocommerce-wrapper .pvh-product-price {
 			display: inline-block;
 			font-family: inherit;
 			font-size: var(--pvh-price-size);
@@ -1662,7 +1743,7 @@ class WebSemicolon_Product_View_History_For_WooCommerce_Plugin {
 			align-items: center;
 			gap: 1rem;
 		}
-		.pvh-layout-list .pvh-product-link {
+		.product-view-history-for-woocommerce-wrapper.pvh-layout-list .pvh-product-link {
 			display: flex;
 			align-items: center;
 			gap: 1rem;

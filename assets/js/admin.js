@@ -27,7 +27,8 @@
 
 			var value = $input.val();
 			if ( 'font' === name ) {
-				value = config.fonts && config.fonts[ value ] ? config.fonts[ value ] : 'inherit';
+				// "Theme font" has no variable: the CSS falls back to the inherited font.
+				value = config.fonts && config.fonts[ value ] && 'inherit' !== value ? config.fonts[ value ] : '';
 			} else if ( ! value ) {
 				// Cleared color: fall back to the built-in one.
 				value = $input.attr( 'data-default-color' ) || '';
